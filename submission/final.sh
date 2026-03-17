@@ -173,9 +173,12 @@ check_cmd "Getting address info"
 
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
 # WRITE YOUR SOLUTION BELOW:
-INTERNAL_KEY=$(echo "$ADDR_INFO" | jq -r '.pubkey')
-check_cmd "Extracting key from descriptor"
-INTERNAL_KEY=$(trim "$INTERNAL_KEY")
+# Extract internal key from the taproot descriptor (desc field contains tr(KEY) or tr(KEY,...))
+INTERNAL_KEY=$(echo "$ADDR_INFO" | jq -r '.pubkey // .desc' | grep -oP '(?<=tr\()[^,)]+' | head -1)
+# Fallback: try internalkey if direct extraction fails
+if [[ -z "$INTERNAL_KEY" || "$INTERNAL_KEY" == "null" ]]; then
+  INTERNAL_KEY=$(echo "$ADDR_INFO" | jq -r '.witness_program // .desc' | grep -oP '(?<=tr\()[^,)]+' | head -1)
+fi
 
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
