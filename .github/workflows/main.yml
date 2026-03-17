@@ -71,7 +71,7 @@ jobs:
         run: |
           chmod +x submission/03.sh
           LATEST_BLOCK_HEIGHT=$(submission/03.sh)
-          if [[ "$LATEST_BLOCK_HEIGHT" >= 0 ]]; then
+          if [[ "$LATEST_BLOCK_HEIGHT" -ge 0 ]]; then
             echo "✅ Success: Node latest block height passed!"
           else
             echo "❌ Error: Node latest block height failed!"
