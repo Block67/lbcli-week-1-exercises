@@ -1,2 +1,2 @@
 # Write the bitcoin cli command to get the bitcoin node installation version
-bitcoin-cli getnetworkinfo | grep "subversion"
+bitcoin-cli -regtest getnetworkinfo | grep "subversion"

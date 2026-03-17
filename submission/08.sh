@@ -1,2 +1,2 @@
 # Generate a native SegWit address.
-bitcoin-cli -rpcwallet=btrustwallet getnewaddress "" bech32
+bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" bech32

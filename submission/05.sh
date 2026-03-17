@@ -1,2 +1,2 @@
 # Check the total amount in the wallet.
-bitcoin-cli -rpcwallet=btrustwallet getbalance
+bitcoin-cli -regtest -rpcwallet=btrustwallet getbalance
